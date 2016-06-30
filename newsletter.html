@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+       	<style type="text/css">
+          td {
+            text-align: center;
+          }
+    	</style>
+    </head>
+    <body>
+      <p>Hey Team,</br></p>
+      <p style="margin-bottom:0px"> {{ info["sales_today"] }} Sales, {{ info["g2g_today"] }} G2G, and {{ info["permits_today"] }} Permits Submitted today brings us to {{ info["sales_tw"] }} Sales, {{ info["g2g_tw"] }} G2G, and {{ info["permits_tw"] }} Permits Submitted this week!</br></p>
+      
+      <p style="margin-bottom:20px">On the calendar tomorrow, {{ info["sales_tmrw"]["total"] }} sales appointments and {{ info["total_cads_tmrw"] }} CAD appointments.</p>
+       <p style="font-weight:bold">1. Today's Sets:</p>
+      <table style="width:530px;border:1px solid black;margin-bottom:20px;padding-top:7px;padding-bottom:7px">
+        <thead>
+          <tr>
+            <th style="text-decoration:underline;width:22%;text-align:left;text-indent:10px">Market</th>
+            <th style="text-decoration:underline;width:18%;text-align:left">Field Sales</th>
+            <th style="text-decoration:underline;width:20%;text-align:left">Inside Sales</th>
+            <th style="text-decoration:underline;width:14%;text-align:left">Events</th>
+            <th style="text-decoration:underline;width:16%;text-align:left">Partners</th>
+            <th style="text-decoration:underline;width:15%;text-align:left">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in info["markets"] %}
+          <tr>
+            <td style="text-align:left;text-indent:10px">{{ item }}</td>
+            <td style="text-align:left">{{ info["set_details"][item]["field"] }}</td>
+            <td style="text-align:left">{{ info["set_details"][item]["isr"] }}</td>
+            <td style="text-align:left">{{ info["set_details"][item]["events"] }}</td>
+            <td style="text-align:left">{{ info["set_details"][item]["partners"] }}</td>
+            <td style="text-align:left">{{ info["set_details"][item]["total"] }}</td>
+          </tr>
+          {% endfor %}
+           <tr>
+            <td style="text-align:left;text-indent:10px;font-weight:bold">Total</td>
+            <td style="text-align:left;font-weight:bold">{{ info["sources"]["field"] }}</td>
+            <td style="text-align:left;font-weight:bold">{{ info["sources"]["isr"] }}</td>
+            <td style="text-align:left;font-weight:bold">{{ info["sources"]["events"] }}</td>
+            <td style="text-align:left;font-weight:bold">{{ info["sources"]["partners"] }}</td>
+            <td style="text-align:left;font-weight:bold">{{ info["total_sets_today"] }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-style:none">Days Set In Future:</p>
+      <table style="width:530px;border:1px solid black;margin-bottom:20px;padding-top:7px;padding-bottom:7px">
+        <thead>
+          <tr>
+            <th style="text-decoration:underline;width:20%;text-align:left;text-indent:10px">Same Day</th>
+            <th style="text-decoration:underline;width:15%;text-align:left">Next Day</th>
+            <th style="text-decoration:underline;width:14%;text-align:left">2 Days</th>
+            <th style="text-decoration:underline;width:18%;text-align:left">3-4 Days</th>
+            <th style="text-decoration:underline;width:18%;text-align:left">5-7 Days</th>
+            <th style="text-decoration:underline;width:19%;text-align:left">8+ Days</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:left;text-indent:10px">{{ info["distribution"]["0"] }}</td>
+            <td style="text-align:left">{{ info["distribution"]["1"] }}</td>
+            <td style="text-align:left">{{ info["distribution"]["2"] }}</td>
+            <td style="text-align:left">{{ info["distribution"]["3-4"] }}</td>
+            <td style="text-align:left">{{ info["distribution"]["5-7"] }}</td>
+            <td style="text-align:left">{{ info["distribution"]["8+"] }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="font-weight:bold">2. Today's Sales Appointments:</p>
+      <table style="width:530px;border:1px solid black;margin-bottom:20px;padding-top:7px;padding-bottom:7px">
+        <thead>
+          <tr>
+            <th style="text-decoration:underline;width:25%;text-align:left;text-indent:10px">On Calendar</th>
+            <th style="text-decoration:underline;width:17%;text-align:left">Sits</th>
+            <th style="text-decoration:underline;width:23%;text-align:left">Sit Rate</th>
+            <th style="text-decoration:underline;width:18%;text-align:left">Sales</th>
+            <th style="text-decoration:underline;width:20%;text-align:left">Close Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:left;text-indent:10px">{{ info["potential_sits"] }}</td>
+            <td style="text-align:left">{{ info["sits"] }}</td>
+            <td style="text-align:left">{{ info["sit_rate"] }}</td>
+            <td style="text-align:left">{{ info["sales_today"] }}</td>
+            <td style="text-align:left">{{ info["close_rate"] }}</td>
+          </tr>
+        </tbody>
+      </table>
+         <p style="font-weight:bold">3. Today's CADs:</p>
+      <table style="width:530px;border:1px solid black;margin-bottom:10px;padding-top:7px;padding-bottom:7px">
+        <thead>
+          <tr>
+            <th style="width:25%;text-align:left;text-indent:10px"><span style="text-decoration:underline">Outcomes</span>*</th>
+            <th style="text-decoration:underline;width:20%;text-align:left">G2G</th>
+            <th style="text-decoration:underline;width:22%;text-align:left">G2G Rate</th>
+            <th style="text-decoration:underline;width:18%;text-align:left">NMT</th>
+            <th style="text-decoration:underline;width:18%;text-align:left">Cancel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:left;text-indent:10px">{{ info["cad_outcomes"] }}</td>
+            <td style="text-align:left">{{ info["g2g_today"] }}</td>
+            <td style="text-align:left">{{ info["g2g_rate"] }}</td>
+            <td style="text-align:left">{{ info["nmt"] }}</td>
+            <td style="text-align:left">{{ info["cancels"] }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-bottom:20px">*Includes those submitted by HQ; does not include reschedules.</p>
+      <p style="margin-bottom:20px"><span style="font-weight:bold">4. Report:</span> http://levelsolar.force.com/salesNewsletter </p>
+    </body>
+    <p>Thanks to all,</br></p>
+    <p>Zack</p>
+</html>
